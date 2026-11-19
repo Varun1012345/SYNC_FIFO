@@ -1,0 +1,23 @@
+# Git
+.git/
+
+# Simulation-generated files
+simulation/fifo_compile
+simulation/fifo_test
+simulation/*.vcd
+simulation/*.vvp
+
+# LibreLane temporary files
+runs/*/tmp/
+runs/*/logs/
+runs/*/reports/
+
+# Temporary files
+*.autosave
+*.swp
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+runs/
