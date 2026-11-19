@@ -32,8 +32,8 @@ The synchronous FIFO consists of a storage array, read and write pointer logic, 
 
 ```mermaid
 flowchart LR
-    DI["Data Input<br/>8-bit"] --> MEM["FIFO Storage<br/>16 × 8-bit"]
-    MEM --> DO["Data Output<br/>8-bit"]
+    DI["Data Input (8-bit)"] --> MEM["FIFO Storage (16 x 8-bit)"]
+    MEM --> DO["Data Output (8-bit)"]
 
     WE["Write Enable"] --> WC["Write Control"]
     RE["Read Enable"] --> RC["Read Control"]
