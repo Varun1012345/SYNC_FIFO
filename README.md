@@ -39,16 +39,48 @@ A parameterized synchronous FIFO designed using Verilog RTL and implemented thro
 
 ## Functional Verification
 
-A self-checking testbench was developed covering reset, basic read/write operations, FIFO boundaries, simultaneous operations, pointer wrap-around and data-order verification.
+A self-checking testbench was developed using Icarus Verilog to verify FIFO functionality.
+
+The following scenarios were tested:
+
+- Synchronous reset operation
+- Basic write and read operations
+- FIFO data ordering
+- Empty and full boundary conditions
+- Almost-full and almost-empty flag behaviour
+- Pointer wrap-around
+- Simultaneous read and write when FIFO is partially occupied
+- Simultaneous read and write when FIFO is full
+- Simultaneous read and write when FIFO is empty
 
 All implemented testbench scenarios passed.
 
+Simulation waveform inspection was performed using GTKWave.
+
+### Running Simulation
+
+```bash
+iverilog -g2012 -o simulation/fifo_test rtl/sync_fifo.v tb/tb_sync_fifo.v
+vvp simulation/fifo_test
+```
 ## Synthesis Results
 
 SKY130A technology mapping using Yosys:
 
-- Mapped cells: 439
-- Mapped cell area: 5928.19 um^2
+### Generic Synthesis
+
+A technology-independent netlist was generated for the FIFO RTL.
+
+### SKY130A Technology Mapping
+
+The design was mapped to standard cells from the SKY130A library.
+
+| Metric | Result |
+|---|---:|
+| Mapped cells | 439 |
+| Mapped cell area | 5928.19 µm² |
+
+The mapped netlist is available in `synthesis/sync_fifo_sky130.v`.
 
 ## Physical Design Results
 
@@ -68,6 +100,16 @@ Physical implementation performed using LibreLane and OpenROAD.
 | LVS errors | 0 |
 
 Power is an implementation estimate, not a silicon measurement.
+
+## Final Physical Layout
+
+The FIFO design was implemented through the RTL-to-GDSII flow using LibreLane and OpenROAD with the SKY130A PDK.
+
+The final layout includes standard-cell placement and routed interconnections.
+
+![SYNC_FIFO Final Physical Layout](physical_design/results/sync_fifo.png)
+
+Final GDSII: `physical_design/results/sync_fifo.gds`
 
 ## Remaining Electrical Warnings
 
@@ -99,6 +141,20 @@ These issues require further investigation before claiming completely clean elec
 - GDSII generated
 - DRC and LVS reported zero errors
 - Remaining electrical warnings documented
+
+## RTL-to-GDSII Flow
+
+The design was taken through the following implementation stages:
+
+1. Verilog RTL design
+2. Functional verification using Icarus Verilog
+3. Generic synthesis using Yosys
+4. SKY130A technology mapping
+5. Floorplanning and placement
+6. Clock tree synthesis
+7. Global and detailed routing
+8. Physical verification using Magic and KLayout
+9. Final GDSII generation
 
 ## Future Work
 
