@@ -26,6 +26,38 @@ A parameterized synchronous FIFO designed using Verilog RTL and implemented thro
 - Simultaneous read/write handling
 - Boundary-condition handling
 
+## FIFO Architecture
+
+The synchronous FIFO consists of a storage array, read and write pointer logic, an occupancy counter and status flag generation logic.
+
+```mermaid
+flowchart LR
+    DI["Data Input<br/>8-bit"] --> MEM["FIFO Storage<br/>16 × 8-bit"]
+    MEM --> DO["Data Output<br/>8-bit"]
+
+    WE["Write Enable"] --> WC["Write Control"]
+    RE["Read Enable"] --> RC["Read Control"]
+    CLK["Clock"] --> WC
+    CLK --> RC
+    RST["Synchronous Reset"] --> WC
+    RST --> RC
+
+    WC --> WP["Write Pointer"]
+    RC --> RP["Read Pointer"]
+
+    WP --> MEM
+    RP --> MEM
+
+    WP --> OCC["Occupancy Counter"]
+    RP --> OCC
+
+    OCC --> FLAGS["Status Flag Logic"]
+    FLAGS --> FULL["Full"]
+    FLAGS --> EMPTY["Empty"]
+    FLAGS --> AF["Almost Full"]
+    FLAGS --> AE["Almost Empty"]
+```
+
 ## Tools Used
 
 - Verilog
