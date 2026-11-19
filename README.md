@@ -89,6 +89,20 @@ All implemented testbench scenarios passed.
 
 Simulation waveform inspection was performed using GTKWave.
 
+## Simulation Waveforms
+
+### Complete Simulation
+
+The waveform shows the overall FIFO simulation, including write and read operations, occupancy tracking and status flag behaviour.
+
+![Complete FIFO Simulation](docs/sync_fifo_complete_waveform.png)
+
+### Detailed Simulation
+
+The detailed waveform highlights FIFO data transfers, occupancy changes and full/almost-full flag transitions.
+
+![Detailed FIFO Simulation](docs/sync_fifo_deatiled.png)
+
 ### Running Simulation
 
 ```bash
